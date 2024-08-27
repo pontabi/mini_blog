@@ -106,6 +106,16 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-aarch64-linux-musl)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm-linux-musl)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86-linux-musl)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -263,6 +273,8 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     securerandom (0.3.1)
     selenium-webdriver (4.23.0)
       base64 (~> 0.2)
@@ -343,6 +355,7 @@ DEPENDENCIES
   rails (~> 7.2.1)
   rspec-rails
   rubocop-rails-omakase
+  sassc
   selenium-webdriver
   sprockets-rails
   sqlite3 (>= 1.4)
