@@ -5,7 +5,7 @@
     </header>
 
     <div class="home-actions">
-        <a href="/login" class="home-button login-button">Log In</a>
-        <a href="/signup" class="home-button signup-button">Sign Up</a>
+        <%= link_to "Sign In", new_user_session_path, class: "home-button login-button" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "home-button signup-button" %>
     </div>
 </div>

@@ -1,0 +1,25 @@
+.flash {
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 600px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.flash-notice {
+  background-color: #e0f7fa;
+  color: #00796b;
+  border: 1px solid #00796b;
+}
+
+.flash-alert {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+.flash p {
+  margin: 0;
+  padding: 10px;
+  font-size: 16px;
+}
