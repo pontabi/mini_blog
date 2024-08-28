@@ -55,30 +55,36 @@ jobs:
 
   rspec:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    services:
+      mysql:
+        image: mysql:9.0.1
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips sqlite3
-
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          ruby-version: 3.2.2
           bundler-cache: true
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
+      - name: Bundler and gem install
         run: |
-          bin/rails db:test:prepare
-          bin/rspec
+          gem install bundler
+          bundle install
+
+      - name: Database create and migrate
+        run: |
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run rspec
+        run: bundle exec rspec
