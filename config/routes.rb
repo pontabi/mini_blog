@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
     unlocks: "users/unlocks"
   }
-  root "static_pages#home"
-  get "/home", to: "static_pages#home"
+  # /, /home, /tweets は全てtweets#indexにルーティーングされる
+  root "tweets#index"
+  get "/home", to: "tweets#index"
+  resources :tweets
 end

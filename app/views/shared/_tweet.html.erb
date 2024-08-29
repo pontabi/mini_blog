@@ -1,0 +1,13 @@
+<div class="tweet-container">
+  <p class="tweet-username"><%= tweet.user.username %></p>
+  <p class="tweet-content"><%= tweet.content %></p>
+  <p class="tweet-timestamp"><%= tweet.created_at.strftime("%B %e, %Y at %l:%M %p") %></p>
+  <div class="tweet-actions">
+    <p class="tweet-back-link"><%= link_to "Home", tweets_path %></p>
+
+    <% if owner?(tweet) %>
+      <p class="tweet-edit-link"><%= link_to "Edit", edit_tweet_path(tweet) %></p>
+      <p class="tweet-delete-button"><%= link_to "Delete", tweet, data: { turbo_method: :delete }  %></p>
+    <% end %>
+  </div>
+</div>

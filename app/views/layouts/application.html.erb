@@ -18,18 +18,9 @@
   </head>
 
   <body>
-    <%= render partial: "shared/nav_bar" %>
-    <div class="flash">
-      <p class="flash-notice"><%= notice %></p>
-      <p class="flash-alert"><%= alert %></p>
-    </div>
-    <div>
-      <% if current_user %>
-        <p>サインイン中のユーザー: <%= current_user.username %></p>
-      <% else %>
-        <p>誰もサインインしてません</p>
-      <% end %>
-    </div>
+    <%= render partial: "layouts/nav_bar" %>
+    <%= render partial: "layouts/flash" %>
+
     <%= yield %>
   </body>
 </html>

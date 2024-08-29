@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_29_074235) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_29_101152) do
+  create_table "tweets", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.bigint "parent_id"
+    t.integer "likes_count", default: 0
+    t.integer "replies_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_tweets_on_created_at"
+    t.index ["parent_id"], name: "index_tweets_on_parent_id"
+    t.index ["user_id", "created_at"], name: "index_tweets_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username", null: false
@@ -24,4 +38,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_074235) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
+
+  add_foreign_key "tweets", "tweets", column: "parent_id"
+  add_foreign_key "tweets", "users"
 end

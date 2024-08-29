@@ -1,11 +1,27 @@
+
+<% content_for :title, "Home" %>
+
+<% unless user_signed_in? %>
 <div class="home-container">
     <header class="home-header">
         <h1 class="home-title">Welcome to Mini Blog</h1>
         <p class="home-subtitle">A simple way to share your thoughts with the world.</p>
     </header>
 
+
     <div class="home-actions">
         <%= link_to "Sign In", new_user_session_path, class: "home-button login-button" %>
         <%= link_to "Sign Up", new_user_registration_path, class: "home-button signup-button" %>
     </div>
+</div>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "New tweet", new_tweet_path %>
+<% end %>
+
+<div class="tweets">
+    <% @tweets.each do |tweet| %>
+      <%= render partial: "shared/tweet", locals: { tweet: tweet } %>
+    <% end %>
 </div>

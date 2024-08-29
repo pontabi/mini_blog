@@ -1,0 +1,64 @@
+.tweet-container {
+  background-color: #f5f8fa;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 500px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.tweet-username {
+  font-weight: bold;
+  color: #14171a;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.tweet-content {
+  color: #657786;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.tweet-timestamp {
+  color: #aab8c2;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.tweet-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tweet-edit-link a,
+.tweet-back-link a {
+  color: #1da1f2;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.tweet-edit-link a:hover,
+.tweet-back-link a:hover {
+  text-decoration: underline;
+}
+
+.tweet-delete-button form {
+  display: inline;
+}
+
+.tweet-delete-button button {
+  background-color: #e0245e;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tweet-delete-button button:hover {
+  background-color: #c21c50;
+}
