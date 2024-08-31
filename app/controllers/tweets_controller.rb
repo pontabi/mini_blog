@@ -57,8 +57,8 @@ class TweetsController < ApplicationController
     end
 
     def authorize_owner
-      unless helpers.owner?(@tweet)
-        redirect_to tweet_url(@tweet), alert: "You don't have permission to do that."
+      unless helpers.tweet_owner?(@tweet)
+        redirect_to root_url, alert: "You don't have permission to do that."
       end
     end
 end

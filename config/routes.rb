@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root "tweets#index"
   get "/home", to: "tweets#index"
   resources :tweets
+  resources :users, only: %i[ index show edit update ]
 end

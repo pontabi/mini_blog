@@ -1,0 +1,22 @@
+<a href="<%= user_path(user) %>" class="user-card-link">
+<div class="user-card">
+  <div class="user-icon">
+    <!-- アイコン表示用のスペース。今はプレースホルダーとして設定 -->
+    <%= image_tag 'user_icon.png', alt: 'User Icon', class: 'icon-placeholder' %>
+  </div>
+
+  <div class="user-info">
+    <h2 class="user-name"><%= user.username %></h2>
+    <% if self_user?(user) %>
+      <%= link_to "Edit Profile", edit_user_path(user) %>
+    <% end %>
+    <p class="user-profile"><%= user.profile_message %></p>
+
+    <div class="user-blogs">
+      <% user.user_blogs.each do |blog| %>
+        <%= sns_icon_link blog %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</a>

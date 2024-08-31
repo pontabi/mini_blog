@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_29_101152) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_29_152426) do
   create_table "tweets", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "content"
@@ -25,6 +25,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_101152) do
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
+  create_table "user_blogs", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "url"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_blogs_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username", null: false
@@ -34,6 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_101152) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "profile_message"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -41,4 +51,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_101152) do
 
   add_foreign_key "tweets", "tweets", column: "parent_id"
   add_foreign_key "tweets", "users"
+  add_foreign_key "user_blogs", "users"
 end

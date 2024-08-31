@@ -67,3 +67,8 @@ end
 gem "omniauth", "~> 2.1"
 
 gem "rails-i18n", "~> 7.0"
+
+
+gem "font-awesome-sass", "~> 6.5"
+
+gem "faker", "~> 3.4"
