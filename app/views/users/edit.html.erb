@@ -1,0 +1,27 @@
+<div class="edit-user-container">
+  <%= render partial: "shared/error_messages", locals: { object: @user } %>
+  <h1 class="profile-edit-header">プロフィールの編集</h1>
+  <%= form_with(model: @user, class: "profile-edit-form") do |f| %>
+    <div class="field profile-message-field">
+      <%= f.label :profile_message, class: "profile-message-label" %>
+      <%= f.text_area :profile_message, class: "profile-message-textarea" %>
+    </div>
+
+    <div class="user-blogs-section">
+      <h2>SNSリンク</h2>
+      <%= f.fields_for :user_blogs do |ff| %>
+        <div class="user-blog-field">
+          <div class="blog-kind-field">
+            <%= ff.select :kind, options_for_select([nil] + UserBlog::KINDS, ff.object.kind), {}, { class: "blog-kind-select" } %>
+          </div>
+
+          <div class="blog-url-field">
+            <%= ff.text_field :url, class: "blog-url-textfield" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= f.submit "Save", class: "profile-edit-submit" %>
+  <% end %>
+</div>

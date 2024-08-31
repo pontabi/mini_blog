@@ -1,0 +1,14 @@
+<!-- app/views/user/_user.html.erb -->
+<a href="<%= user_path(user) %>" class="user-card-link">
+  <div class="user-card">
+    <div class="user-icon">
+      <!-- アイコン表示用のスペース。今はプレースホルダーとして設定 -->
+      <%= image_tag 'user_icon.png', alt: 'User Icon', class: 'icon-placeholder' %>
+    </div>
+
+    <div class="user-info">
+      <h2 class="user-name"><%= user.username %></h2>
+      <p class="user-profile"><%= truncate(user.profile_message, length: 200) %></p>
+    </div>
+  </div>
+</a>
