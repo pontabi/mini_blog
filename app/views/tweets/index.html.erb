@@ -17,7 +17,9 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <%= link_to "New tweet", new_tweet_path %>
+  <%= link_to new_tweet_path, class: "new-tweet-icon" do %>
+    <%= icon('fa-solid', 'plus', class:"fa-1x") %>
+  <% end %>
 <% end %>
 
 <div class="tweets">
