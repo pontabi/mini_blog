@@ -23,7 +23,9 @@
 <% end %>
 
 <div class="tweets">
-    <% @tweets.each do |tweet| %>
-      <%= render partial: "shared/tweet", locals: { tweet: tweet } %>
-    <% end %>
+  <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
+    <%= render @tweets %>
+
+    <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets) %>
+  <% end %>
 </div>

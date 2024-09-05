@@ -6,10 +6,12 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
     unlocks: "users/unlocks"
   }
+  get "/manifest.json", to: "pwa#manifest", defaults: { format: :json }
   # /, /home, /tweets は全てtweets#indexにルーティーングされる
+  resources :tweets
   root "tweets#index"
   get "/home", to: "tweets#index"
-  resources :tweets
+
   resources :users, only: %i[ index show edit update ]
 
   resources :follows, only: %i[ create destroy ]

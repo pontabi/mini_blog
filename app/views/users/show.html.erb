@@ -2,6 +2,6 @@
 
 <div class="user-tweets">
   <% @user.tweets.each do |tweet| %>
-    <%= render 'shared/tweet', tweet: tweet %>
+    <%= render 'tweets/tweet', tweet: tweet %>
   <% end %>
 </div>

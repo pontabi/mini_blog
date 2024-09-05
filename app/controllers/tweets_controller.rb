@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   before_action :authorize_owner, only: %i[ edit update destroy ]
 
   def index
-    @tweets = Tweet.includes(:user).order(created_at: :desc)
+    @tweets = Tweet.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
