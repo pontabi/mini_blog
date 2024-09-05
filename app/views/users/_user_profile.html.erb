@@ -1,4 +1,4 @@
-<a href="<%= user_path(user) %>" class="user-card-link">
+
 <div class="user-card">
   <div class="user-icon">
     <!-- アイコン表示用のスペース。今はプレースホルダーとして設定 -->
@@ -7,10 +7,28 @@
 
   <div class="user-info">
     <h2 class="user-name"><%= user.username %></h2>
+
+    <% if user_signed_in? && !current_user?(user) %>
+    <div id="follow_form">
+      <% if current_user.following?(user) %>
+        <%= render 'users/unfollow' %>
+      <% else %>
+        <%= render 'users/follow' %>
+      <% end %>
+    </div>
+    <% end %>
+
     <% if self_user?(user) %>
       <%= link_to "Edit Profile", edit_user_path(user) %>
     <% end %>
     <p class="user-profile"><%= user.profile_message %></p>
+
+    <%= link_to followings_path(user), class: "followings-link" do %>
+      フォロー <span id="followings_count"><%= user.followings.count %></span>
+    <% end %>
+    <%= link_to followers_path(user), class: "followers-link" do %>
+      フォロワー <span id="followers_count"><%= user.followers.count %></span>
+    <% end %>
 
     <div class="user-blogs">
       <% user.user_blogs.each do |blog| %>
@@ -19,4 +37,3 @@
     </div>
   </div>
 </div>
-</a>

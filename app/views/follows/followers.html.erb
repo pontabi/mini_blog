@@ -1,0 +1,5 @@
+<h1><%= @user.username %>がフォローされているユーザー</h1>
+
+<% @followers.each do |follower| %>
+  <%= render partial: "shared/user", locals: { user: follower } %>
+<% end %>

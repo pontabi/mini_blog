@@ -5,7 +5,7 @@
   border: 1px solid #e1e1e1;
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
 }
 
 .user-card-link {
@@ -35,6 +35,18 @@
 
 .user-info {
   flex: 1;
+
+  .followings-link,
+  .followers-link {
+    color: #333;
+    text-decoration: none;
+    margin-right: 20px;
+
+    &:hover {
+      text-decoration: underline;
+      color: #555;
+    }
+  }
 }
 
 .user-name {

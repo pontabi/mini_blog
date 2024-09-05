@@ -12,6 +12,10 @@ module UserHelper
     user_signed_in? && current_user == user
   end
 
+  def current_user?(user)
+    current_user == user
+  end
+
   def sns_icon_link(blog)
     icon_class = sns_icon_class(blog)
     link_to blog.url, target: "_blank", rel: "noopener" do

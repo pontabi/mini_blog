@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   get "/home", to: "tweets#index"
   resources :tweets
   resources :users, only: %i[ index show edit update ]
+
+  resources :follows, only: %i[ create destroy ]
+  get "/followings/:id", to: "follows#followings", as: "followings"
+  get "/followers/:id", to: "follows#followers", as: "followers"
 end
