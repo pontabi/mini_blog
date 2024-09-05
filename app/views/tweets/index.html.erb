@@ -22,10 +22,27 @@
   <% end %>
 <% end %>
 
-<div class="tweets">
-  <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
-    <%= render @tweets %>
+<div class="tweets-container">
+  <%= turbo_frame_tag :tweets_container do %>
+    <% if user_signed_in? %>
+    <div class="tweets-filter-links">
+      <%= link_to '全てのツイート',
+                  tweets_path(filter: 'all'),
+                  class: "tweets-filter-link #{'active' if @filter == 'all'}",
+                  data: { turbo_frame: 'tweets_container' } %>
+      <%= link_to 'フォロー中',
+                  tweets_path(filter: 'following'),
+                  class: "tweets-filter-link #{'active' if @filter == 'following'}",
+                  data: { turbo_frame: 'tweets_container' } %>
+    </div>
+    <% end %>
 
-    <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets) %>
+    <div class="tweets">
+      <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
+        <%= render @tweets %>
+
+        <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets) %>
+      <% end %>
+    </div>
   <% end %>
 </div>

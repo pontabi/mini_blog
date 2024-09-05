@@ -2,6 +2,13 @@
   padding-bottom: 20px;
 }
 
+.tweet-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .tweet-container {
   background-color: #f5f8fa;
   border: 1px solid #e1e8ed;
@@ -12,85 +19,137 @@
   font-family: Arial, sans-serif;
 }
 
-.tweet-username {
-  text-decoration: none;
-  font-weight: bold;
-  color: #14171a;
-  margin-bottom: 8px;
-  font-size: 18px;
-}
-
-.tweet-content {
-  color: #657786;
-  margin-bottom: 12px;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.tweet-timestamp {
-  color: #aab8c2;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.tweet-actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-.tweet-edit-link a,
-.tweet-back-link a {
-  color: #1da1f2;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.tweet-edit-link a:hover,
-.tweet-back-link a:hover {
-  text-decoration: underline;
-}
-
-.tweet-delete-button form {
-  display: inline;
-}
-
-.tweet-delete-button button {
-  background-color: #e0245e;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.tweet-delete-button button:hover {
-  background-color: #c21c50;
-}
-
-.tweet-user-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: inherit;
-
-  &:hover {
-    box-shadow: inset 0 -1px 0 0 #ddd;
+//
+.tweet-container.show {
+  .tweet-username {
+    text-decoration: none;
+    font-weight: bold;
+    color: #14171a;
+    margin-bottom: 8px;
+    font-size: 18px;
   }
 
-  .tweet-user-icon {
-    margin-right: 8px;
+  .tweet-content {
+    color: #657786;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
-  .icon-placeholder {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: #ddd;
+  .tweet-timestamp {
+    color: #aab8c2;
+    font-size: 14px;
+    margin: 0px;
+  }
+
+  .tweet-actions {
+    display: flex;
+    justify-content: right;
+    gap: 8px;
+  }
+
+  .edit-button {
+    color: #14171a;
+    display: inline-block;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .edit-button:hover {
+    background-color: #d4dadc;
+  }
+
+  .delete-button {
+    color: #14171a;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .delete-button:hover {
+    background-color: #f592b0;
+  }
+
+  .tweet-user-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: inherit;
+
+    &:hover {
+      box-shadow: inset 0 -1px 0 0 #ddd;
+    }
+
+    .tweet-user-icon {
+      margin-right: 8px;
+    }
+
+    .icon-placeholder {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: #ddd;
+    }
   }
 }
+
+.tweet-container.edit {
+  textarea {
+    display: block;
+    width: 95%;
+    height: 100px;
+    margin: 8px auto;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .tweet-actions {
+    display: flex;
+    justify-content: right;
+    gap: 8px;
+  }
+
+  .cancel-button {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #e1e8ed;
+    color: #14171a;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .cancel-button:hover {
+    background-color: #d4dadc;
+  }
+
+  .submit-button {
+    background-color: #1da1f2;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .submit-button:hover {
+    background-color: #0f81d9;
+  }
+}
+
 
 .new-tweet-icon {
   position: fixed;
@@ -117,4 +176,51 @@
     display: block;
     line-height: 1;
   }
+}
+
+////////////////////////////////////
+/// ツイートのフィルタリングタブメニュー
+
+.tweets-filter-links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.tweets-filter-link {
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:first-child {
+    border-right: solid 1px #ddd;
+  }
+
+  // デフォルトのリンクの色
+  color: #007bff;
+
+  // ホバー時のスタイル
+  &:hover {
+    background-color: #f0f8ff;
+    color: #0056b3;
+  }
+
+  // フォーカス時のスタイル
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  }
+
+  // アクティブ時のスタイル
+  &.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+}
+
+
+.tweets-container {
+  max-width: 800px; /* コンテナの最大幅を設定 */
+  margin: 20px auto; /* 上下にマージンを追加し、中央寄せ */
+  padding: 10px;
 }

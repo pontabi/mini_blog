@@ -4,7 +4,13 @@ class TweetsController < ApplicationController
   before_action :authorize_owner, only: %i[ edit update destroy ]
 
   def index
-    @tweets = Tweet.includes(:user).order(created_at: :desc).page(params[:page])
+    @filter = params[:filter] || "all"
+    if @filter == "following"
+      # ログイン中のユーザーがフォローしているユーザーのツイートを取得
+      @tweets = Tweet.includes(:user).where(user: current_user.followings).order(created_at: :desc).page(params[:page])
+    else
+      @tweets = Tweet.includes(:user).order(created_at: :desc).page(params[:page])
+    end
   end
 
   def show
@@ -31,8 +37,9 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1 or /tweets/1.json
   def update
     if @tweet.update(tweet_params)
-      redirect_to tweet_url(@tweet), notice: "Tweet was successfully updated."
+      flash.now.notice = "ツイートを更新しました"
     else
+      # バリデーションエラー時にはedit.html.erbをrenderする
       render :edit, status: :unprocessable_entity
     end
   end
@@ -40,11 +47,7 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
     @tweet.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    flash.now.notice = "ツイートが削除されました。"
   end
 
   private

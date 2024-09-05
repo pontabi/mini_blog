@@ -1,27 +1,24 @@
-<%= form_with(model: tweet) do |form| %>
-  <% if tweet.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+<%= turbo_frame_tag tweet do %>
 
-      <ul>
-        <% tweet.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: tweet) do |form| %>
+    <div class="tweet-container edit">
+      <%= form.text_area :content %>
+      <% if tweet.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+
+          <ul>
+            <% tweet.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="tweet-actions">
+        <%= link_to "キャンセル", tweet, class: "cancel-button" %>
+        <%= form.submit class: "submit-button" %>
+      </div>
     </div>
+
   <% end %>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
