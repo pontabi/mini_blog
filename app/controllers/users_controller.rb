@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @tweets = @user.tweets.order(created_at: :desc).page(params[:page])
   end
 
   def edit

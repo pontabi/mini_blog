@@ -1,7 +1,10 @@
 <%= render partial: 'users/user_profile', locals: { user: @user } %>
 
-<div class="user-tweets">
-  <% @user.tweets.each do |tweet| %>
-    <%= render 'tweets/tweet', tweet: tweet %>
+<div class="tweets">
+
+  <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
+    <%= render @tweets %>
+
+    <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets) %>
   <% end %>
 </div>
