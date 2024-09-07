@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "like_#{@tweet.id}" do %>
+  <%= turbo_frame_tag "like_#{@tweet.id}" do %>
+    <%= render partial: 'tweets/like_button', locals: { tweet: @tweet } %>
+  <% end %>
+<% end %>

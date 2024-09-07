@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_03_234702) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_07_043627) do
   create_table "follows", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "follower_id", null: false
     t.bigint "followed_id", null: false
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_03_234702) do
     t.index ["followed_id"], name: "index_follows_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
+
+  create_table "likes", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id", "user_id"], name: "index_likes_on_tweet_id_and_user_id", unique: true
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "tweets", charset: "utf8mb3", force: :cascade do |t|
@@ -61,6 +71,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_03_234702) do
 
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "likes", "tweets"
+  add_foreign_key "likes", "users"
   add_foreign_key "tweets", "tweets", column: "parent_id"
   add_foreign_key "tweets", "users"
   add_foreign_key "user_blogs", "users"

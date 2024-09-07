@@ -26,11 +26,11 @@
 
       <div class="d-flex">
         <%= link_to followings_path(user), class: "btn btn-link p-0 me-3" do %>
-          フォロー <span id="followings_count"><%= user.followings.count %></span>
+          フォロー <span id="followings_count"><%= user.followings.size %></span>
         <% end %>
 
         <%= link_to followers_path(user), class: "btn btn-link p-0" do %>
-          フォロワー <span id="followers_count"><%= user.followers.count %></span>
+          フォロワー <span id="followers_count"><%= user.followers.size %></span>
         <% end %>
       </div>
 

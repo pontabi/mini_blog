@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   }
   get "/manifest.json", to: "pwa#manifest", defaults: { format: :json }
   # /, /home, /tweets は全てtweets#indexにルーティーングされる
-  resources :tweets
+  resources :tweets do
+    resource :like, only: %i[ create destroy ]
+  end
   root "tweets#index"
   get "/home", to: "tweets#index"
 

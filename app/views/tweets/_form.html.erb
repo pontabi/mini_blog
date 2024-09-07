@@ -7,7 +7,7 @@
 
       <% if tweet.errors.any? %>
         <div class="alert alert-danger">
-          <h4 class="alert-heading"><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h4>
+          <h4 class="alert-heading"><%= pluralize(tweet.errors.size, "error") %> prohibited this tweet from being saved:</h4>
           <ul>
             <% tweet.errors.each do |error| %>
               <li><%= error.full_message %></li>

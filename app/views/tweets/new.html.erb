@@ -4,7 +4,7 @@
 
 <% if @tweet.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@tweet.errors.count, "error") %></h2>
+    <h2><%= pluralize(@tweet.errors.size, "error") %></h2>
 
     <ul>
       <% @tweet.errors.each do |error| %>

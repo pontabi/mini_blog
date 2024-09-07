@@ -1,0 +1,5 @@
+<% if tweet.likes.any? %>
+  <%= link_to icon("fa-solid", "heart"), tweet_like_path(tweet), data: { turbo_method: :delete } %> <%= tweet.likes.size %>
+<% else %>
+  <%= link_to icon("fa-regular", "heart"), tweet_like_path(tweet), data: { turbo_method: :post } %> <%= tweet.likes.size %>
+<% end %>

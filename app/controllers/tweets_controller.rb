@@ -7,9 +7,9 @@ class TweetsController < ApplicationController
     @filter = params[:filter] || "all"
     if @filter == "following"
       # ログイン中のユーザーがフォローしているユーザーのツイートを取得
-      @tweets = Tweet.includes(:user).where(user: current_user.followings).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.includes(:user, :likes).where(user: current_user.followings).order(created_at: :desc).page(params[:page])
     else
-      @tweets = Tweet.includes(:user).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.includes(:user, :likes).order(created_at: :desc).page(params[:page])
     end
   end
 
