@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update ]
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :authorize_user, only: %i[ edit update ]
 
@@ -8,15 +7,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tweets = @user.tweets.order(created_at: :desc).page(params[:page])
+    @user = User.find(params[:id])
+    @tweets = @user.tweets.includes(:likes).order(created_at: :desc).page(params[:page])
   end
 
   def edit
-    # 10個のフォームを表示する
+    @user = User.find(params[:id])
     @user.user_blogs.length.upto(9) { @user.user_blogs.build }
   end
 
   def update
+    @user = User.find(params[:id])
     clean_user_blogs_params
 
     if @user.update(user_params)
@@ -40,10 +41,6 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:profile_message, user_blogs_attributes: %i[ id url kind _destroy ])
-    end
-
-    def set_user
-      @user = User.find(params[:id])
     end
 
     def authorize_user
