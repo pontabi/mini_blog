@@ -1,6 +1,6 @@
 <%= render partial: 'users/user_profile', locals: { user: @user } %>
 
-<div class="tweets">
+<div class="container">
 
   <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
     <%= render @tweets %>

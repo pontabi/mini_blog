@@ -1,47 +1,45 @@
-
 <% content_for :title, "Home" %>
 
 <% unless user_signed_in? %>
-<div class="home-container">
-    <header class="home-header">
-        <h1 class="home-title">Welcome to Mini Blog</h1>
-        <p class="home-subtitle">A simple way to share your thoughts with the world.</p>
+<div class="container text-center my-5">
+    <header class="mb-4">
+        <h1 class="display-4">Welcome to Mini Blog</h1>
+        <p class="lead">A simple way to share your thoughts with the world.</p>
     </header>
 
-
-    <div class="home-actions">
-        <%= link_to "Sign In", new_user_session_path, class: "home-button login-button" %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "home-button signup-button" %>
+    <div>
+        <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg mx-2" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-secondary btn-lg mx-2" %>
     </div>
 </div>
 <% end %>
 
 <% if user_signed_in? %>
-  <%= link_to new_tweet_path, class: "new-tweet-icon" do %>
+  <%= link_to new_tweet_path, class: "btn btn-success btn-lg position-fixed bottom-0 end-0 m-4" do %>
     <%= icon('fa-solid', 'plus', class:"fa-1x") %>
   <% end %>
 <% end %>
 
-<div class="tweets-container">
+<div class="container">
   <%= turbo_frame_tag :tweets_container do %>
     <% if user_signed_in? %>
-    <div class="tweets-filter-links">
+    <div class="btn-group mb-4">
       <%= link_to '全てのツイート',
                   tweets_path(filter: 'all'),
-                  class: "tweets-filter-link #{'active' if @filter == 'all'}",
+                  class: "btn btn-outline-primary #{'active' if @filter == 'all'}",
                   data: { turbo_frame: 'tweets_container' } %>
       <%= link_to 'フォロー中',
                   tweets_path(filter: 'following'),
-                  class: "tweets-filter-link #{'active' if @filter == 'following'}",
+                  class: "btn btn-outline-primary #{'active' if @filter == 'following'}",
                   data: { turbo_frame: 'tweets_container' } %>
     </div>
     <% end %>
 
-    <div class="tweets">
+    <div class="tweets row">
       <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
         <%= render @tweets %>
 
-        <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets) %>
+        <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets), class: "lazy-load" %>
       <% end %>
     </div>
   <% end %>

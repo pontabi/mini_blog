@@ -1,7 +1,9 @@
-<h1>All Users</h1>
 
-<div class="users">
+<div class="container">
+  <h1 class="mb-4">All Users</h1>
   <% @users.each do |user| %>
-    <%= render partial: 'shared/user', locals: { user: user } %>
+    <div class="mb-4">
+      <%= render partial: 'shared/user', locals: { user: user } %>
+    </div>
   <% end %>
 </div>

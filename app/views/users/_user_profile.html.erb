@@ -1,39 +1,44 @@
-
-<div class="user-card">
-  <div class="user-icon">
-    <!-- アイコン表示用のスペース。今はプレースホルダーとして設定 -->
-    <%= image_tag 'user_icon.png', alt: 'User Icon', class: 'icon-placeholder' %>
-  </div>
-
-  <div class="user-info">
-    <h2 class="user-name"><%= user.username %></h2>
-
-    <% if user_signed_in? && !current_user?(user) %>
-    <div id="follow_form">
-      <% if current_user.following?(user) %>
-        <%= render 'users/unfollow' %>
-      <% else %>
-        <%= render 'users/follow' %>
-      <% end %>
+<div class="mb-4 shadow-sm p-3">
+  <div class="d-flex align-items-center">
+    <div class="me-3">
+      <!-- アイコン表示用のスペース。今はプレースホルダーとして設定 -->
+      <%= image_tag 'user_icon.png', alt: 'User Icon', class: 'rounded-circle', size: "50x50" %>
     </div>
-    <% end %>
 
-    <% if self_user?(user) %>
-      <%= link_to "Edit Profile", edit_user_path(user) %>
-    <% end %>
-    <p class="user-profile"><%= user.profile_message %></p>
+    <div>
+      <h2 class="h5 mb-2"><%= user.username %></h2>
 
-    <%= link_to followings_path(user), class: "followings-link" do %>
-      フォロー <span id="followings_count"><%= user.followings.count %></span>
-    <% end %>
-    <%= link_to followers_path(user), class: "followers-link" do %>
-      フォロワー <span id="followers_count"><%= user.followers.count %></span>
-    <% end %>
-
-    <div class="user-blogs">
-      <% user.user_blogs.each do |blog| %>
-        <%= sns_icon_link blog %>
+      <% if user_signed_in? && !current_user?(user) %>
+        <div id="follow_form">
+          <% if current_user.following?(user) %>
+            <%= render 'users/unfollow' %>
+          <% else %>
+            <%= render 'users/follow' %>
+          <% end %>
+        </div>
       <% end %>
+
+      <% if self_user?(user) %>
+        <%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-outline-secondary btn-sm mb-2" %>
+      <% end %>
+
+      <p class="text-muted"><%= user.profile_message %></p>
+
+      <div class="d-flex">
+        <%= link_to followings_path(user), class: "btn btn-link p-0 me-3" do %>
+          フォロー <span id="followings_count"><%= user.followings.count %></span>
+        <% end %>
+
+        <%= link_to followers_path(user), class: "btn btn-link p-0" do %>
+          フォロワー <span id="followers_count"><%= user.followers.count %></span>
+        <% end %>
+      </div>
+
+      <div class="mt-2">
+        <% user.user_blogs.each do |blog| %>
+          <%= sns_icon_link blog %> <!-- SNSアイコンリンクの表示部分 -->
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
