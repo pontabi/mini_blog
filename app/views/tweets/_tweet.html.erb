@@ -24,6 +24,33 @@
       </div>
 
       <p class="mt-3"><%= tweet.content %></p>
+      <% if tweet.images.attached? %>
+        <div class="d-flex t-3">
+          <% tweet.images.each_with_index do |image, index| %>
+            <div class="">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal-<%= index %>">
+                <%= image_tag image, class: "img-fluid img-thumbnail", style: "width: 200px; height: 200px;" %>
+              </a>
+            </div>
+
+            <!-- モーダルのHTML -->
+            <div class="modal fade" id="imageModal-<%= index %>" tabindex="-1" aria-labelledby="imageModalLabel-<%= index %>" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel-<%= index %>">Image <%= index + 1 %></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <%= image_tag image, class: "img-fluid" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
       <p class="text-muted small"><%= l tweet.created_at %></p>
 
       <%# reply / show / like %>

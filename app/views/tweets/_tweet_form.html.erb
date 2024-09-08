@@ -15,6 +15,11 @@
     <%= f.text_area :content, class: "form-control", rows: 5 %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :images, "画像" %><br>
+    <%= f.file_field :images, accept: "image/*", multiple: true, class: "form-control" %>
+  </div>
+
   <% if defined? parent_tweet %>
     <%= f.hidden_field :parent_id, value: parent_tweet.id %>
   <% end %>
