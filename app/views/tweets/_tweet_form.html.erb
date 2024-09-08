@@ -1,0 +1,25 @@
+<!-- app/views/tweets/_tweet_form.html.erb -->
+<% if tweet.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h2><%= pluralize(tweet.errors.size, "error") %></h2>
+    <ul>
+      <% tweet.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: tweet, local: true, class: "needs-validation" do |f| %>
+  <div class="form-group">
+    <%= f.text_area :content, class: "form-control", rows: 5 %>
+  </div>
+
+  <% if defined? parent_tweet %>
+    <%= f.hidden_field :parent_id, value: parent_tweet.id %>
+  <% end %>
+
+  <div class="form-group mt-3">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

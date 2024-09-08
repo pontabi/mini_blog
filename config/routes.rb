@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # /, /home, /tweets は全てtweets#indexにルーティーングされる
   resources :tweets do
     resource :like, only: %i[ create destroy ]
+    member do
+      get :new_reply, to: "tweets#new_reply", as: "new_reply"
+    end
   end
   root "tweets#index"
   get "/home", to: "tweets#index"

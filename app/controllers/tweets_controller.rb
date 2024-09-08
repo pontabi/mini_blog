@@ -7,13 +7,14 @@ class TweetsController < ApplicationController
     @filter = params[:filter] || "all"
     if @filter == "following"
       # ログイン中のユーザーがフォローしているユーザーのツイートを取得
-      @tweets = Tweet.includes(:user, :likes).where(user: current_user.followings).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.includes(:user, :likes, :parent, :children).where(user: current_user.followings).order(created_at: :desc).page(params[:page])
     else
-      @tweets = Tweet.includes(:user, :likes).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.includes(:user, :likes, :parent, :children).order(created_at: :desc).page(params[:page])
     end
   end
 
   def show
+    @children = @tweet.children.includes(:user, :likes)
   end
 
   def new
@@ -50,9 +51,15 @@ class TweetsController < ApplicationController
     flash.now.notice = "ツイートが削除されました。"
   end
 
+  # GET /tweets/:id/new_reply
+  def new_reply
+    @parent_tweet = Tweet.find(params[:id])
+    @reply_tweet = Tweet.new(parent_id: params[:id])
+  end
+
   private
     def tweet_params
-      params.require(:tweet).permit(:content)
+      params.require(:tweet).permit(:content, :parent_id)
     end
 
     def set_tweet

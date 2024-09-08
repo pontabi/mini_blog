@@ -15,13 +15,21 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <%= link_to new_tweet_path, class: "btn btn-success btn-lg position-fixed bottom-0 end-0 m-4" do %>
+<%###### 新規投稿 ######%>
+  <button type="button"
+          class="btn btn-success btn-lg position-fixed bottom-0 end-0 m-4"
+          data-bs-toggle="modal"
+          data-bs-target="#tweetModal">
     <%= icon('fa-solid', 'plus', class:"fa-1x") %>
-  <% end %>
+  </button>
+
+  <%= render 'tweet_modal' %>
 <% end %>
+
 
 <div class="container">
   <%= turbo_frame_tag :tweets_container do %>
+    <%###### ツイート一のフィルタリング ######%>
     <% if user_signed_in? %>
     <div class="btn-group mb-4">
       <%= link_to '全てのツイート',
@@ -35,6 +43,7 @@
     </div>
     <% end %>
 
+    <%###### ツイート一覧 ######%>
     <div class="tweets row">
       <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
         <%= render @tweets %>

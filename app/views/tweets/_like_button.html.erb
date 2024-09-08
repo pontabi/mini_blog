@@ -1,4 +1,6 @@
-<% if tweet.likes.any? %>
+<% if !user_signed_in? %>
+  <%= icon('fa-regular', 'heart', class: 'me-1') %> <%= tweet.likes.size %>
+<% elsif already_liked?(tweet.likes, current_user) %>
   <%= link_to icon("fa-solid", "heart"), tweet_like_path(tweet), data: { turbo_method: :delete } %> <%= tweet.likes.size %>
 <% else %>
   <%= link_to icon("fa-regular", "heart"), tweet_like_path(tweet), data: { turbo_method: :post } %> <%= tweet.likes.size %>

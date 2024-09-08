@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Reply</h2>
+  <div class="p-4 bg-light" style="border-left: 4px solid #ddd;">
+    <%= render partial: "tweets/tweet_summary", locals: { tweet: @parent_tweet } %>
+  </div>
+
+  <div class="pt-4">
+    <%= render partial: "tweets/tweet_form", locals: { tweet: @reply_tweet, parent_tweet: @parent_tweet } %>
+  </div>
+</div>
