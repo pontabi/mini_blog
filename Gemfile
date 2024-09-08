@@ -54,6 +54,8 @@ group :development, :test do
 
   gem "rspec-rails"
   gem "factory_bot_rails"
+
+  gem "letter_opener_web"
 end
 
 group :development do

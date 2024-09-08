@@ -29,6 +29,12 @@ class TweetsController < ApplicationController
     @tweet.user = current_user
 
     if @tweet.save
+      if tweet_params[:parent_id].present?
+        TweetMailer.with(user: @tweet.parent.user, tweet: @tweet.parent, reply_tweet: @tweet)
+                   .notify_reply_to_tweet
+                   .deliver_later
+      end
+
       redirect_to tweet_url(@tweet), notice: "Tweet was successfully created."
     else
       render :new, status: :unprocessable_entity

@@ -1,0 +1,17 @@
+<%= @user.username %>さん、
+
+あなたのツイートにリプライが届きました。
+
+---
+
+ツイート:
+<%= @user.username %>（<%= @tweet.created_at.strftime("%Y/%m/%d %H:%M") %>）
+「<%= @tweet.content %>」
+
+---
+
+リプライ:
+<%= @reply_tweet.user.username %>（<%= @reply_tweet.created_at.strftime("%Y/%m/%d %H:%M") %>）
+「<%= @reply_tweet.content %>」
+
+---
