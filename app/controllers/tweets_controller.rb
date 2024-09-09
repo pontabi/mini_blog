@@ -7,14 +7,14 @@ class TweetsController < ApplicationController
     @filter = params[:filter] || "all"
     if @filter == "following"
       # ログイン中のユーザーがフォローしているユーザーのツイートを取得
-      @tweets = Tweet.includes(:user, :likes, :parent, :children).where(user: current_user.followings).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.includes(:user, :parent).no_parent.where(user: current_user.followings).order(created_at: :desc).page(params[:page])
     else
-      @tweets = Tweet.includes(:user, :likes, :parent, :children).order(created_at: :desc).page(params[:page])
+      @tweets = Tweet.includes(:user, :parent).no_parent.order(created_at: :desc).page(params[:page])
     end
   end
 
   def show
-    @children = @tweet.children.includes(:user, :likes)
+    @children = @tweet.children.includes(:user)
   end
 
   def new
@@ -30,6 +30,7 @@ class TweetsController < ApplicationController
 
     if @tweet.save
       if tweet_params[:parent_id].present?
+        @tweet.parent.increment!(:replies_count)
         TweetMailer.with(user: @tweet.parent.user, tweet: @tweet.parent, reply_tweet: @tweet)
                    .notify_reply_to_tweet
                    .deliver_later
@@ -53,7 +54,10 @@ class TweetsController < ApplicationController
 
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
-    @tweet.destroy!
+    ActiveRecord::Base.transaction do
+      @tweet.destroy!
+      @tweet.parent.decrement!(:replies_count) if @tweet.parent.present?
+    end
     flash.now.notice = "ツイートが削除されました。"
   end
 

@@ -4,37 +4,46 @@
 @reply_tweet
 %>
 
-<h2><%= @user.username %>さんのツイートにリプライが届いています。</h2>
+<div class="container">
 
-<div class="mailer-tweet">
-  <div class="mailer-tweet__header">
-    <div class="mailer-tweet__header__user">
-      <%= @user.username %>
-    </div>
-    <div class="mailer-tweet__header__time">
-      <%= @tweet.created_at.strftime("%Y/%m/%d %H:%M") %>
-    </div>
-  </div>
-  <div class="mailer-tweet__body">
-    <%= @tweet.content %>
-  </div>
-</div>
+  <h2><%= @user.username %>さんのツイートにリプライが届いています。</h2>
 
-<div class="mailer-reply">
-  <div class="mailer-reply__header">
-    <div class="mailer-reply__header__user">
-      <%= @reply_tweet.user.username %>
+  <div class="mailer-tweet">
+    <div class="mailer-tweet__header">
+      <div class="mailer-tweet__header__user">
+        <%= @user.username %>
+      </div>
+      <div class="mailer-tweet__header__time">
+        <%= @tweet.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>
     </div>
-    <div class="mailer-reply__header__time">
-      <%= @reply_tweet.created_at.strftime("%Y/%m/%d %H:%M") %>
+    <div class="mailer-tweet__body">
+      <%= @tweet.content %>
     </div>
   </div>
-  <div class="mailer-reply__body">
-    <%= @reply_tweet.content %>
+
+  <div class="mailer-reply">
+    <div class="mailer-reply__header">
+      <div class="mailer-reply__header__user">
+        <%= @reply_tweet.user.username %>
+      </div>
+      <div class="mailer-reply__header__time">
+        <%= @reply_tweet.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>
+    </div>
+    <div class="mailer-reply__body">
+      <%= @reply_tweet.content %>
+    </div>
   </div>
 </div>
 
 <style>
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .mailer-tweet,
 .mailer-reply {
   border: 1px solid #e1e8ed;

@@ -1,7 +1,7 @@
 <% if !user_signed_in? %>
-  <%= icon('fa-regular', 'heart', class: 'me-1') %> <%= tweet.likes.size %>
+  <%= icon('fa-regular', 'heart', class: 'me-1') %> <%= tweet.likes_count %>
 <% elsif already_liked?(tweet.likes, current_user) %>
-  <%= link_to icon("fa-solid", "heart"), tweet_like_path(tweet), data: { turbo_method: :delete } %> <%= tweet.likes.size %>
+  <%= link_to icon("fa-solid", "heart"), tweet_like_path(tweet), data: { turbo_method: :delete } %> <%= tweet.likes_count %>
 <% else %>
-  <%= link_to icon("fa-regular", "heart"), tweet_like_path(tweet), data: { turbo_method: :post } %> <%= tweet.likes.size %>
+  <%= link_to icon("fa-regular", "heart"), tweet_like_path(tweet), data: { turbo_method: :post } %> <%= tweet.likes_count %>
 <% end %>

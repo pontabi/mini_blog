@@ -1,0 +1,12 @@
+昨日のいいね数ランキングTOP10
+
+<% @tweets.each do |tweet| %>
+----------------------------------------
+ユーザー名: <%= tweet.user.username %>
+投稿日: <%= tweet.created_at.strftime("%Y/%m/%d %H:%M") %>
+内容:
+<%= tweet.content %>
+いいね数: <%= tweet.likes_count %>
+----------------------------------------
+
+<% end %>

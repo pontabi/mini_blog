@@ -1,0 +1,78 @@
+<%#
+@users
+@tweets
+ %>
+
+<div class="container">
+  <h2>昨日のいいね数ランキングTOP10</h2>
+
+  <% @tweets.each do |tweet| %>
+    <div class="mailer-tweet">
+      <div class="mailer-tweet__header">
+        <div class="mailer-tweet__header__user">
+          <%= tweet.user.username %>
+        </div>
+        <div class="mailer-tweet__header__time">
+          <%= tweet.created_at.strftime("%Y/%m/%d %H:%M") %>
+        </div>
+      </div>
+      <div class="mailer-tweet__body">
+        <%= tweet.content %>
+      </div>
+      いいね数: <%= tweet.likes_count %>
+    </div>
+  <% end %>
+
+</div>
+
+<style>
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.mailer-tweet{
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background-color: #f5f8fa;
+}
+
+.mailer-tweet__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mailer-tweet__header__user {
+  font-weight: bold;
+  font-size: 16px;
+  color: #1da1f2;
+}
+
+.mailer-tweet__header__time {
+  font-size: 14px;
+  color: #657786;
+}
+
+.mailer-tweet__body {
+  font-size: 16px;
+  color: #14171a;
+  line-height: 1.5;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #14171a;
+  margin-bottom: 20px;
+}
+
+.mailer-tweet__body {
+  margin-bottom: 20px;
+}
+
+</style>

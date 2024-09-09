@@ -59,7 +59,7 @@
         <%= link_to icon("fa-solid", "reply"), new_reply_tweet_path(tweet), data: { turbo: "false" } if user_signed_in? %>
         <%###### showボタン ######%>
         <%= link_to icon("fa-regular", "message"), tweet_path(tweet), data: { turbo: "false" } %>
-        <%= tweet.children.size %>
+        <%= tweet.replies_count %>
         <%###### いいねボタン ######%>
         <div class="d-flex align-items-center">
           <%= turbo_frame_tag "like_#{tweet.id}" do %>
