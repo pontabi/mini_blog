@@ -1,5 +1,10 @@
 require "factory_bot_rails"
 
+if User.exists?
+  puts "Seed data already exists. Skipping..."
+  return
+end
+
 BLOG_KINDS = %w[Blog Instagram X Facebook Youtube Github LinkedIn Others]
 
 ############################
