@@ -1,0 +1,20 @@
+FROM ruby:3.2.2
+
+RUN apt-get update -qq && apt-get install -y nodejs yarn postgresql-client curl
+
+RUN curl -o /usr/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
+    chmod +x /usr/bin/wait-for-it.sh
+
+# Set the working directory
+WORKDIR /rails
+
+COPY Gemfile Gemfile.lock ./
+
+# Install Ruby dependencies
+RUN bundle install --without development test
+
+COPY . .
+
+RUN RAILS_ENV=production bundle exec rake assets:precompile
+
+CMD ["bash", "-c", "wait-for-it.sh db:5432 -- rm -f tmp/pids/server.pid && bundle exec rails db:prepare && rails server -e production -b '0.0.0.0'"]
