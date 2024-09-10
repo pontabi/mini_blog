@@ -48,7 +48,7 @@
       <%= turbo_frame_tag "tweets-page-#{@tweets.current_page}" do %>
         <%= render @tweets %>
 
-        <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets), class: "lazy-load" %>
+        <%= turbo_frame_tag "tweets-page-#{@tweets.next_page}", loading: :lazy, src: path_to_next_page(@tweets), class: "lazy-load", style: "padding: 1px;" %>
       <% end %>
     </div>
   <% end %>
