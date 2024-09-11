@@ -1,6 +1,6 @@
 require "factory_bot_rails"
 
-if User.exists?
+if User.find_by(email: "alice@example.com").present?
   puts "Seed data already exists. Skipping..."
   return
 end
