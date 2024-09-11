@@ -56,7 +56,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "rspec-rails"
-  gem "factory_bot_rails"
 
   gem "letter_opener_web"
 end
@@ -79,4 +78,5 @@ gem "rails-i18n", "~> 7.0"
 
 gem "font-awesome-sass", "~> 6.5"
 
+gem "factory_bot_rails"
 gem "faker", "~> 3.4"
