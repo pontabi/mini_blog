@@ -189,6 +189,13 @@ GEM
       letter_opener (~> 1.9)
       railties (>= 6.1)
       rexml
+    libv8-node (18.19.0.0)
+    libv8-node (18.19.0.0-aarch64-linux)
+    libv8-node (18.19.0.0-aarch64-linux-musl)
+    libv8-node (18.19.0.0-arm64-darwin)
+    libv8-node (18.19.0.0-x86_64-darwin)
+    libv8-node (18.19.0.0-x86_64-linux)
+    libv8-node (18.19.0.0-x86_64-linux-musl)
     logger (1.6.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -201,6 +208,8 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     mini_mime (1.1.5)
+    mini_racer (0.16.0)
+      libv8-node (~> 18.19.0.0)
     minitest (5.25.1)
     msgpack (1.7.2)
     net-imap (0.4.14)
@@ -443,6 +452,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   letter_opener_web
+  mini_racer
   omniauth (~> 2.1)
   pg
   puma (>= 5.0)

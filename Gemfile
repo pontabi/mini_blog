@@ -40,6 +40,7 @@ gem "devise"
 gem "dotenv-rails"
 gem "kaminari"
 gem "bootstrap", "~> 5.3.3"
+gem "mini_racer"
 gem "jquery-rails"
 gem "active_storage_validations"
 gem "whenever", require: false
