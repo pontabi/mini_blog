@@ -20,3 +20,9 @@ https://mini-blog-1y38.onrender.com/
 |---------------------|-----------|
 | bob@example.com     | password  |
 | alice@example.com   | password  |
+
+## デモ動画
+
+
+https://github.com/user-attachments/assets/753198c9-b819-4554-b5f0-3c3d7a3edbe1
+
